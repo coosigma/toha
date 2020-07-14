@@ -1,0 +1,19 @@
+<script type="text/javascript" src="/assets/js/viz.js"> </script>
+<script type="text/javascript">
+    (function () {
+        { {/*  var vizPrefix = "language-viz-";  */ } }
+        var vizPrefix = "language-graphviz";
+        Array.prototype.forEach.call(document.querySelectorAll("[class^=" + vizPrefix + "]"), function (x) {
+            var engine;
+            x.getAttribute("class").split(" ").forEach(function (cls) {
+                if (cls.startsWith(vizPrefix)) {
+                    { {/*  engine = cls.substr(vizPrefix.length);  */ } }
+                    engine = "dot";
+                }
+            });
+            var image = new DOMParser().parseFromString(Viz(x.innerText, { format: "svg", engine: engine }), "image/svg+xml");
+            x.parentNode.insertBefore(image.documentElement, x);
+            x.style.display = 'none'
+        });
+    })();
+</script>
